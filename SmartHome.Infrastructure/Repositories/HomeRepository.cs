@@ -6,7 +6,7 @@ namespace SmartHome.Infrastructure.Repositories;
 
 public class HomeRepository(ApplicationDbContext context) : IHomeRepository
 {
-    public async Task<Guid> AddAsync(Home homeDomain, CancellationToken ct)
+    public async Task<Guid> AddAsync(Home homeDomain, CancellationToken cancellationToken)
     {
         var dbEntity = new HomeEntity
         {
@@ -21,7 +21,7 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
         };
         
         context.Homes.Add(dbEntity);
-        await context.SaveChangesAsync(ct);
+        await context.SaveChangesAsync(cancellationToken);
         return dbEntity.Id;
     }
 }
