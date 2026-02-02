@@ -1,17 +1,18 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using SmartHome.Application;
 using SmartHome.Infrastructure;
-using SmartHome.Infrastructure.Configurations;
+using SmartHomeApi.GraphQL.Mutations;
+using SmartHomeApi.GraphQL.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<Database>(builder.Configuration.GetSection("Database"));
-builder.Services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
-    {
-        var dbSettings = serviceProvider.GetRequiredService<IOptions<Database>>().Value;
-        options.UseNpgsql(dbSettings.ConnectionString, x => x.MigrationsAssembly("SmartHome.Infrastructure"));
-    }
-);
+builder.Services.AddApplicationDi();
+builder.Services.AddInfrastructureDi(builder.Configuration);
+
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<DummyQuery>()
+    .AddMutationType<Mutation>()
+    .AddTypeExtension<HomeMutations>();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -24,5 +25,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.MapGraphQL();
 
 app.Run();
