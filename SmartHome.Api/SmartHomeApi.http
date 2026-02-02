@@ -1,6 +1,20 @@
-@SmartHomeApi_HostAddress = http://localhost:5093
+@SmartHomeApi_HostAddress = http://localhost:5000
 
 GET {{SmartHomeApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### Create a new Home
+POST {{SmartHomeApi_HostAddress}}/graphql/
+Content-Type: application/json
+
+{
+  "query": "mutation($input: HomeTypeInput!) { createHome(input: $input) }",
+  "variables": {
+    "input": {
+      "name": "Byt 1",
+      "street": "Testovací 1",
+      "city": "Brno",
+      "zipCode": "60200"
+    }
+  }
+}
