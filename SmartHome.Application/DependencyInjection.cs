@@ -9,6 +9,7 @@ public static class DependencyInjection
     {
         services.AddMediatR(cfg => {
             cfg.RegisterServicesFromAssembly(typeof(CreateHomeCommand).Assembly);
+            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
 
         return services;
