@@ -12,16 +12,18 @@ public sealed class HomeEntity
 
     public static Home MapToDomain(HomeEntity homeEntity)
     {
-        var homeDomain = new Home();
-        homeDomain.Id = homeEntity.Id;
-        homeDomain.Name = homeEntity.Name;
-        homeDomain.Address = new Domain.Domains.Address()
+        var homeDomain = new Home
         {
-            Street = homeEntity.Address.Street,
-            City = homeEntity.Address.City,
-            ZipCode = homeEntity.Address.ZipCode
+            Id = homeEntity.Id,
+            Name = homeEntity.Name,
+            Address = new Domain.Domains.Address()
+            {
+                Street = homeEntity.Address.Street,
+                City = homeEntity.Address.City,
+                ZipCode = homeEntity.Address.ZipCode
+            }
         };
-        
+
         return homeDomain;
     }
 }
