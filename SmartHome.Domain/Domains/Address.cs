@@ -1,4 +1,4 @@
-namespace SmartHome.Infrastructure.Entities;
+namespace SmartHome.Domain.Domains;
 
 public record Address
 {
