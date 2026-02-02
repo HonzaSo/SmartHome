@@ -9,34 +9,34 @@ public class ApplicationDbContext : DbContext
     {
     }
     
-    public DbSet<Home> Homes => Set<Home>();
-    public DbSet<Room> Rooms => Set<Room>();
-    public DbSet<Device> Devices => Set<Device>();
+    public DbSet<HomeEntity> Homes => Set<HomeEntity>();
+    public DbSet<RoomEntity> Rooms => Set<RoomEntity>();
+    public DbSet<DeviceEntity> Devices => Set<DeviceEntity>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         
-        modelBuilder.Entity<Home>(entity =>
+        modelBuilder.Entity<HomeEntity>(entity =>
         {
             entity.HasKey(h => h.Id);
             entity.ComplexProperty(h => h.Address); 
         
             entity.HasMany(h => h.Rooms)
-                .WithOne(r => r.Home)
+                .WithOne(r => r.HomeEntity)
                 .HasForeignKey(r => r.HomeId);
         });
 
-        modelBuilder.Entity<Room>(entity =>
+        modelBuilder.Entity<RoomEntity>(entity =>
         {
             entity.HasKey(r => r.Id);
         
             entity.HasMany(r => r.Devices)
-                .WithOne(d => d.Room)
+                .WithOne(d => d.RoomEntity)
                 .HasForeignKey(d => d.RoomId);
         });
 
-        modelBuilder.Entity<Device>(entity =>
+        modelBuilder.Entity<DeviceEntity>(entity =>
         {
             entity.HasKey(d => d.Id);
         });
