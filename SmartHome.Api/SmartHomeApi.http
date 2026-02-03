@@ -11,10 +11,18 @@ Content-Type: application/json
   "query": "mutation($input: HomeTypeInput!) { createHome(input: $input) }",
   "variables": {
     "input": {
-      "name": "Byt 1",
-      "street": "Testovací 1",
+      "name": "Byt 2",
+      "street": "Testovací 2",
       "city": "Brno",
       "zipCode": "60200"
     }
   }
+}
+
+### Getting all Homes
+POST {{SmartHomeApi_HostAddress}}/graphql/
+Content-Type: application/json
+
+{
+  "query": "query { allHome { id name street city }}"
 }
