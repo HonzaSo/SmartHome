@@ -18,7 +18,7 @@ builder.Host.UseSerilog();
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<DummyQuery>()
+    .AddQueryType<HomeQueries>()
     .AddMutationType<Mutation>()
     .AddTypeExtension<HomeMutations>();
 

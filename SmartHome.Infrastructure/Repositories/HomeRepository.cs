@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using SmartHome.Application.Interfaces;
 using SmartHome.Domain.Domains;
 using SmartHome.Infrastructure.Entities;
+using SmartHome.Infrastructure.Mappers;
 
 namespace SmartHome.Infrastructure.Repositories;
 
@@ -23,5 +25,12 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
         context.Homes.Add(dbEntity);
         await context.SaveChangesAsync(cancellationToken);
         return dbEntity.Id;
+    }
+
+    public async Task<List<Home>> GetAllHomesAsync(CancellationToken cancellationToken)
+    {
+        var homes = await context.Homes.AsNoTracking().ToListAsync(cancellationToken);
+        
+        return homes.Select(HomeMapper.MapToDomain).ToList();
     }
 }
