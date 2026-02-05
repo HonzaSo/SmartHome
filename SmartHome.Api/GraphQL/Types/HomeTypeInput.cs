@@ -1,8 +1,7 @@
 namespace SmartHomeApi.GraphQL.Types;
 
-public class GetHomeType
+public class HomeTypeInput
 {
-    public Guid Id { get; set; }
     public string Name { get; set; }
     public string Street { get; set; }
     public string City { get; set; }

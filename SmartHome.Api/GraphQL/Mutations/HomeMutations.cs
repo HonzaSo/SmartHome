@@ -7,7 +7,7 @@ namespace SmartHomeApi.GraphQL.Mutations;
 [ExtendObjectType(typeof(Mutation))]
 public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
 {
-    public async Task<Guid> CreateHome(HomeType input)
+    public async Task<Guid> CreateHome(HomeTypeInput input)
     {
         logger.LogInformation("Creating home {HomeName}", input.Name);
         
