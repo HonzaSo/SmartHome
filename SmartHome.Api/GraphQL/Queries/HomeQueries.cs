@@ -8,7 +8,7 @@ namespace SmartHomeApi.GraphQL.Queries;
 
 public class HomeQueries (IMediator mediator, ILogger<HomeMutations> logger)
 {
-    public async Task<List<HomeType>> GetAllHome()
+    public async Task<List<GetHomeType>> GetAllHome()
     {
         logger.LogInformation("Getting all homes");
         
