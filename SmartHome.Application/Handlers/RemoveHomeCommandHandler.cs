@@ -18,8 +18,8 @@ public class RemoveHomeCommandHandler(IHomeRepository homeRepository, ILogger<Re
                 logger.LogWarning("Domov s ID {HomeId} nebyl nalezen pro smazání.", request.Id);
 
                 return DeleteResultStatus.NotFound;
-            
             }
+            
             await homeRepository.RemoveByIdAsync(request.Id, cancellationToken);
             return DeleteResultStatus.Deleted;
         }
