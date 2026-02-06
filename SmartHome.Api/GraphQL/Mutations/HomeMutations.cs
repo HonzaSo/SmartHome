@@ -14,5 +14,14 @@ public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
         var request = new CreateHomeCommand(input.Name, input.Street, input.City, input.ZipCode);
         return await mediator.Send(request);
     }
-}
     
+    public async Task<string> RemoveHomeById(Guid homeId)
+    {
+        logger.LogInformation("Removing home by id: {HomeId}", homeId);
+        
+        var request = new RemoveHomeCommand(homeId);
+        var result = await mediator.Send(request);
+
+        return result.ToString();
+    }
+}

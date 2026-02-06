@@ -5,8 +5,10 @@ namespace SmartHome.Infrastructure.Mappers;
 
 public static class HomeMapper
 {
-    public static Home MapToDomain(HomeEntity homeEntity)
+    public static Home? MapToDomain(HomeEntity? homeEntity)
     {
+        if (homeEntity == null) return null;
+        
         var homeDomain = new Home
         {
             Id = homeEntity.Id,

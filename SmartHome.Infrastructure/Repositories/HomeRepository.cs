@@ -33,4 +33,18 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
         
         return homes.Select(HomeMapper.MapToDomain).ToList();
     }
+
+    public async Task<Home?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var homeEntity = await context.Homes.FirstOrDefaultAsync(h => h.Id == id, cancellationToken);
+        return HomeMapper.MapToDomain(homeEntity);
+    }
+    
+    public async Task RemoveByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        await context.Homes
+            .Where(h => h.Id == id)
+            .ExecuteDeleteAsync(cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }
