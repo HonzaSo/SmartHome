@@ -6,4 +6,6 @@ public interface IHomeRepository
 {
     Task<Guid> AddAsync(Home home, CancellationToken cancellationToken);
     Task<List<Home>> GetAllHomesAsync(CancellationToken cancellationToken);
+    Task<Home?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task RemoveByIdAsync(Guid id, CancellationToken cancellationToken);
 }
