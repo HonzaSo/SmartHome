@@ -20,7 +20,8 @@ builder.Services
     .AddGraphQLServer()
     .AddQueryType<HomeQueries>()
     .AddMutationType<Mutation>()
-    .AddTypeExtension<HomeMutations>();
+    .AddTypeExtension<HomeMutations>()
+    .AddTypeExtension<RoomMutations>();
 
 builder.Services.AddApplicationDi();
 builder.Services.AddInfrastructureDi(builder.Configuration);
