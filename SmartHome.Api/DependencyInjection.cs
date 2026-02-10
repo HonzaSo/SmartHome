@@ -8,6 +8,7 @@ public static class DependencyInjection
     public static IServiceCollection AddApiDi(this IServiceCollection services)
     {
         services.AddScoped<HomeMutations>();
+        services.AddScoped<RoomMutations>();
         services.AddScoped<HomeQueries>();
 
         return services;

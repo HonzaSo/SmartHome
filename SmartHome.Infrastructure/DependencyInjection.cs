@@ -24,6 +24,7 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IHomeRepository, HomeRepository>();
+        services.AddScoped<IRoomRepository, RoomRepository>();
 
         return services;
     }
