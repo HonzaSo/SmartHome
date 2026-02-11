@@ -7,6 +7,6 @@ public class RoomEntity
     public string Type { get; set; }
 
     public Guid HomeId { get; set; }
-    public virtual HomeEntity HomeEntity { get; set; } = null!;
-    public virtual ICollection<DeviceEntity> Devices { get; set; } = new List<DeviceEntity>();
+    public HomeEntity HomeEntity { get; set; } = null!;
+    public ICollection<DeviceEntity> Devices { get; set; } = new List<DeviceEntity>();
 }

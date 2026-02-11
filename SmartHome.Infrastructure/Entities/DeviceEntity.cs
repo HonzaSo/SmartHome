@@ -9,6 +9,6 @@ public class DeviceEntity
     public string State { get; set; }
 
     public Guid RoomId { get; set; }
-    public virtual RoomEntity RoomEntity { get; set; } = null!;
+    public RoomEntity RoomEntity { get; set; } = null!;
     
 }
