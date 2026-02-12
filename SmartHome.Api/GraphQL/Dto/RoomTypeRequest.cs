@@ -1,8 +1,8 @@
 using SmartHomeApi.GraphQL.Enums;
 
-namespace SmartHomeApi.GraphQL.Types;
+namespace SmartHomeApi.GraphQL.Dto;
 
-public class RoomTypeInput
+public class RoomTypeRequest
 {
     public string Name { get; set; }
     public RoomTypeEnum Type { get; set; }

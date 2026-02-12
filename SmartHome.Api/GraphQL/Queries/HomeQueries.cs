@@ -1,7 +1,7 @@
 using MediatR;
 using SmartHome.Application.Queries;
+using SmartHomeApi.GraphQL.Dto;
 using SmartHomeApi.GraphQL.Mutations;
-using SmartHomeApi.GraphQL.Types;
 using SmartHomeApi.Mappers;
 
 namespace SmartHomeApi.GraphQL.Queries;

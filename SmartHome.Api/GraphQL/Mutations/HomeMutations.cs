@@ -1,20 +1,27 @@
 using MediatR;
 using SmartHome.Application.Commands;
 using SmartHome.Application.Handlers;
+using SmartHomeApi.GraphQL.Dto;
 using SmartHomeApi.GraphQL.Enums;
-using SmartHomeApi.GraphQL.Types;
 
 namespace SmartHomeApi.GraphQL.Mutations;
 
 [ExtendObjectType(typeof(Mutation))]
 public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
 {
-    public async Task<Guid> CreateHome(HomeTypeInput input)
+    public async Task<Guid> CreateHome(HomeTypeRequest request)
     {
-        logger.LogInformation("Creating home {HomeName}", input.Name);
+        logger.LogInformation("Creating home {HomeName}", request.Name);
         
-        var request = new CreateHomeCommand(input.Name, input.Street, input.City, input.ZipCode);
-        return await mediator.Send(request);
+        var command = new CreateHomeCommand()
+        {
+            Name = request.Name, 
+            Street = request.Street, 
+            City = request.City, 
+            ZipCode = request.ZipCode
+        };
+        
+        return await mediator.Send(command);
     }
     
     public async Task<HomeRemovalResult> RemoveHomeById(Guid homeId)
