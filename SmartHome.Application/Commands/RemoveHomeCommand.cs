@@ -3,7 +3,7 @@ using SmartHome.Application.Handlers;
 
 namespace SmartHome.Application.Commands;
 
-public record RemoveHomeCommand(Guid Id) : IRequest<DeleteResultStatus>
+public record RemoveHomeCommand : IRequest<DeleteResultStatus>
 {
-    public Guid Id { get; init; } = Id;
+    public Guid Id { get; init; }
 }
