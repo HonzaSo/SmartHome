@@ -1,4 +1,4 @@
-namespace SmartHomeApi.GraphQL.Dto;
+namespace SmartHomeApi.GraphQL.Dtos;
 
 public class GetHomeType
 {

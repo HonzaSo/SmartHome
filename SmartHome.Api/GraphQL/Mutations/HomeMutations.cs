@@ -1,7 +1,7 @@
 using MediatR;
 using SmartHome.Application.Commands;
 using SmartHome.Application.Handlers;
-using SmartHomeApi.GraphQL.Dto;
+using SmartHomeApi.GraphQL.Dtos;
 using SmartHomeApi.GraphQL.Enums;
 
 namespace SmartHomeApi.GraphQL.Mutations;
