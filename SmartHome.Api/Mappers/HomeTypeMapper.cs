@@ -1,5 +1,5 @@
 using SmartHome.Domain.Domains;
-using SmartHomeApi.GraphQL.Dtos;
+using SmartHomeApi.GraphQL.Dtos.Homes;
 
 namespace SmartHomeApi.Mappers;
 

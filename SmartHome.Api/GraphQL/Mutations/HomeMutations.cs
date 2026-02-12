@@ -1,7 +1,7 @@
 using MediatR;
 using SmartHome.Application.Commands;
 using SmartHome.Application.Handlers;
-using SmartHomeApi.GraphQL.Dtos;
+using SmartHomeApi.GraphQL.Dtos.Homes;
 using SmartHomeApi.GraphQL.Enums;
 
 namespace SmartHomeApi.GraphQL.Mutations;
@@ -28,7 +28,11 @@ public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
     {
         logger.LogInformation("Removing home by id: {HomeId}", homeId);
         
-        var request = new RemoveHomeCommand(homeId);
+        var request = new RemoveHomeCommand()
+        {
+            Id = homeId
+        };
+        
         var result = await mediator.Send(request);
 
         return result switch
