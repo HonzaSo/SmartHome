@@ -1,7 +1,7 @@
 using MediatR;
 using SmartHome.Application.Commands;
 using SmartHome.Domain.Enums;
-using SmartHomeApi.GraphQL.Dtos;
+using SmartHomeApi.GraphQL.Dtos.Rooms;
 
 namespace SmartHomeApi.GraphQL.Mutations;
 
