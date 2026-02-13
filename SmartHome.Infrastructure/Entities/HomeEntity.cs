@@ -4,7 +4,7 @@ namespace SmartHome.Infrastructure.Entities;
 
 public sealed class HomeEntity
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
     public string Name { get; set; }
     public Address Address { get; set; }
     

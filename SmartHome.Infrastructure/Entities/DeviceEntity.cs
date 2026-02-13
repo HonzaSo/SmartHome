@@ -2,7 +2,7 @@ namespace SmartHome.Infrastructure.Entities;
 
 public class DeviceEntity
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
     public string Name { get; set; }
     public string Model { get; set; }
     public string Manufacturer { get; set; }
