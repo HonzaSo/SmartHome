@@ -31,7 +31,10 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
     {
         var homes = await context.Homes.AsNoTracking().ToListAsync(cancellationToken);
         
-        return homes.Select(HomeMapper.MapToDomain).ToList();
+        return homes.Select(HomeMapper.MapToDomain)
+             .Where(h => h != null)
+             .Cast<Home>()
+             .ToList();
     }
 
     public async Task<Home?> GetByIdAsync(Guid id, CancellationToken cancellationToken)

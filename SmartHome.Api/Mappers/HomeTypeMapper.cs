@@ -5,9 +5,9 @@ namespace SmartHomeApi.Mappers;
 
 public static class HomeTypeMapper
 {
-    public static GetHomeType MapFromDomain(Home home)
+    public static GetHomeResponse MapFromDomain(Home home)
     {
-        return new GetHomeType()
+        return new GetHomeResponse()
         {
             Id = home.Id,
             Name =  home.Name,

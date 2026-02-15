@@ -1,6 +1,6 @@
 namespace SmartHomeApi.GraphQL.Dtos.Homes;
 
-public class GetHomeType
+public class GetHomeResponse
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
