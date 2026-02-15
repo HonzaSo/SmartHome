@@ -7,7 +7,10 @@ public static class HomeMapper
 {
     public static Home? MapToDomain(HomeEntity? homeEntity)
     {
-        if (homeEntity == null) return null;
+        if (homeEntity == null)
+        {
+            return null;
+        }
         
         var homeDomain = new Home
         {

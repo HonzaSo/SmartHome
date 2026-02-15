@@ -18,7 +18,9 @@ builder.Host.UseSerilog();
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<HomeQueries>()
+    .AddQueryType<Query>()
+    .AddTypeExtension<HomeQueries>()
+    .AddTypeExtension<RoomQueries>()
     .AddMutationType<Mutation>()
     .AddTypeExtension<HomeMutations>()
     .AddTypeExtension<RoomMutations>();
