@@ -1,5 +1,5 @@
 using MediatR;
-using SmartHome.Application.Handlers;
+using SmartHome.Application.Enums;
 
 namespace SmartHome.Application.Commands;
 

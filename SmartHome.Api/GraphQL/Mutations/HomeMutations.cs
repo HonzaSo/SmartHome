@@ -1,6 +1,6 @@
 using MediatR;
 using SmartHome.Application.Commands;
-using SmartHome.Application.Handlers;
+using SmartHome.Application.Enums;
 using SmartHomeApi.GraphQL.Dtos.Homes;
 using SmartHomeApi.GraphQL.Enums;
 
@@ -39,6 +39,7 @@ public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
         {
             DeleteResultStatus.Deleted => HomeRemovalResult.Success,
             DeleteResultStatus.NotFound => HomeRemovalResult.NotFound,
+            DeleteResultStatus.HasRelatedRecords => HomeRemovalResult.HasRelatedRecords,
             _ => HomeRemovalResult.Failure
         };
     }

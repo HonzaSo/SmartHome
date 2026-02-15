@@ -8,7 +8,7 @@ POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
 
 {
-  "query": "mutation($input: HomeTypeInput!) { createHome(input: $input) }",
+  "query": "mutation($input: HomeTypeRequestInput!) { createHome(request: $input) }",
   "variables": {
     "input": {
       "name": "Byt 2",
@@ -32,5 +32,20 @@ POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
 
 {
-  "query": "mutation { removeHomeById(homeId: \"d0efe94a-6fad-426e-b639-0cbf0fe2fb64\") }"
+  "query": "mutation { removeHomeById(homeId: \"81cf53b2-4f40-48c3-9225-f3d435003a44\") }"
+}
+
+### Create a new Room
+POST {{SmartHomeApi_HostAddress}}/graphql/
+Content-Type: application/json
+
+{
+  "query": "mutation($input: RoomTypeRequestInput!) { createRoom(request: $input) }",
+  "variables": {
+    "input": {
+      "name": "Obývací pokoj",
+      "type": "LivingRoom",
+      "homeId": "81cf53b2-4f40-48c3-9225-f3d435003a44"
+    }
+  }
 }
