@@ -50,4 +50,9 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
             .ExecuteDeleteAsync(cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
     }
+
+    public Task<bool> HasRoomsAsync(Guid homeId, CancellationToken cancellationToken)
+    {
+        return context.Rooms.AnyAsync(r => r.HomeId == homeId, cancellationToken);
+    }
 }

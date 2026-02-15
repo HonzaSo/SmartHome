@@ -4,5 +4,6 @@ public enum HomeRemovalResult
 {
     Success,
     NotFound,
+    HasRelatedRecords,
     Failure
 }
