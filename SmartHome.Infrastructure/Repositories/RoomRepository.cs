@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using SmartHome.Application.Interfaces;
 using SmartHome.Domain.Domains;
 using SmartHome.Infrastructure.Entities;
+using SmartHome.Infrastructure.Mappers;
 
 namespace SmartHome.Infrastructure.Repositories;
 
@@ -19,5 +21,17 @@ public class RoomRepository (ApplicationDbContext context) : IRoomRepository
         context.Rooms.Add(roomEntity);
         await context.SaveChangesAsync(cancellationToken);
         return roomEntity.Id;
+    }
+
+    public async Task<List<Room>> GetAllRoomsByHomeIdAsync(Guid homeId, CancellationToken cancellationToken)
+    {
+        var roomEntities = await context.Rooms
+            .Where(r => r.HomeId == homeId)
+            .ToListAsync(cancellationToken);
+            
+        return roomEntities.Select(RoomMapper.MapToDomain)
+            .Where(x => x != null)
+            .Cast<Room>()
+            .ToList();
     }
 }

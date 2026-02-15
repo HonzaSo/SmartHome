@@ -1,12 +1,12 @@
 using MediatR;
 using SmartHome.Application.Queries;
 using SmartHomeApi.GraphQL.Dtos.Homes;
-using SmartHomeApi.GraphQL.Mutations;
 using SmartHomeApi.Mappers;
 
 namespace SmartHomeApi.GraphQL.Queries;
 
-public class HomeQueries (IMediator mediator, ILogger<HomeMutations> logger)
+[ExtendObjectType(typeof(Query))]
+public class HomeQueries (IMediator mediator, ILogger<HomeQueries> logger)
 {
     public async Task<List<GetHomeResponse>> GetAllHome()
     {
