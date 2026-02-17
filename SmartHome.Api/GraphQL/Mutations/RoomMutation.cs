@@ -5,7 +5,7 @@ using SmartHomeApi.GraphQL.Dtos.Rooms;
 
 namespace SmartHomeApi.GraphQL.Mutations;
 
-[ExtendObjectType(typeof(Mutation))]
+[ExtendObjectType("Mutation")]
 public class RoomMutations (IMediator mediator, ILogger<RoomMutations> logger)
 {
     public async Task<Guid> CreateRoom(RoomTypeRequest request)

@@ -18,12 +18,12 @@ builder.Host.UseSerilog();
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>()
-    .AddTypeExtension<HomeQueries>()
-    .AddTypeExtension<RoomQueries>()
-    .AddMutationType<Mutation>()
-    .AddTypeExtension<HomeMutations>()
-    .AddTypeExtension<RoomMutations>();
+    .AddQueryType(d => d.Name("Query"))
+        .AddTypeExtension<HomeQueries>()
+        .AddTypeExtension<RoomQueries>()
+    .AddMutationType(d => d.Name("Mutation"))
+        .AddTypeExtension<HomeMutations>()
+        .AddTypeExtension<RoomMutations>();
 
 builder.Services.AddApplicationDi();
 builder.Services.AddInfrastructureDi(builder.Configuration);
