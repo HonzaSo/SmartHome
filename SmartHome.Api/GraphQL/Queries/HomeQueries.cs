@@ -5,7 +5,7 @@ using SmartHomeApi.Mappers;
 
 namespace SmartHomeApi.GraphQL.Queries;
 
-[ExtendObjectType(typeof(Query))]
+[ExtendObjectType("Query")]
 public class HomeQueries (IMediator mediator, ILogger<HomeQueries> logger)
 {
     public async Task<List<GetHomeResponse>> GetAllHome()

@@ -1,8 +1,5 @@
 @SmartHomeApi_HostAddress = http://localhost:5000
 
-GET {{SmartHomeApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
 ### Create a new Home
 POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
@@ -32,7 +29,7 @@ POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
 
 {
-  "query": "mutation { removeHomeById(homeId: \"81cf53b2-4f40-48c3-9225-f3d435003a44\") }"
+  "query": "mutation { removeHomeById(homeId: \"7c0221c4-cf80-46c9-b62e-b23396f1e51e\") }"
 }
 
 ### Create a new Room

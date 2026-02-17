@@ -5,7 +5,7 @@ using SmartHomeApi.Mappers;
 
 namespace SmartHomeApi.GraphQL.Queries;
 
-[ExtendObjectType(typeof(Query))]
+[ExtendObjectType("Query")]
 public class RoomQueries(IMediator mediator, ILogger<RoomQueries> logger)
 {
     public async Task<List<RoomTypeResponse>> GetRoomsByHomeId(Guid homeId)

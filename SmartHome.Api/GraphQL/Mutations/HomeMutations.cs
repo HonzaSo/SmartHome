@@ -6,7 +6,7 @@ using SmartHomeApi.GraphQL.Enums;
 
 namespace SmartHomeApi.GraphQL.Mutations;
 
-[ExtendObjectType(typeof(Mutation))]
+[ExtendObjectType("Mutation")]
 public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
 {
     public async Task<Guid> CreateHome(HomeTypeRequest request)
