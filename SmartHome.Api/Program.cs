@@ -2,6 +2,8 @@ using Serilog;
 using SmartHome.Application;
 using SmartHome.Infrastructure;
 using SmartHomeApi;
+using SmartHomeApi.GraphQL.Dtos.Rooms;
+using SmartHomeApi.GraphQL.Interfaces;
 using SmartHomeApi.GraphQL.Mutations;
 using SmartHomeApi.GraphQL.Queries;
 
@@ -23,7 +25,11 @@ builder.Services
         .AddTypeExtension<RoomQueries>()
     .AddMutationType(d => d.Name("Mutation"))
         .AddTypeExtension<HomeMutations>()
-        .AddTypeExtension<RoomMutations>();
+        .AddTypeExtension<RoomMutations>()
+    .AddUnionType<IGetRoomResult>(d => d
+        .Name("GetRoomResult")
+        .Type<ObjectType<RoomTypeResponse>>()
+        .Type<ObjectType<GetErrorResult>>());
 
 builder.Services.AddApplicationDi();
 builder.Services.AddInfrastructureDi(builder.Configuration);

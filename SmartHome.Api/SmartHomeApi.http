@@ -57,3 +57,14 @@ Content-Type: application/json
     "homeId": "81cf53b2-4f40-48c3-9225-f3d435003a44"
   }
 }
+
+### Get Room by ID
+POST {{SmartHomeApi_HostAddress}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query($id: UUID!) { roomById(id: $id) { ... on RoomTypeResponse { id name type } ... on GetErrorResult { message code entityName } } }",
+  "variables": {
+    "id": "00a298f8-d702-4040-b51d-10437c355f53"
+  }
+}
