@@ -6,4 +6,4 @@ public interface IGetRoomResult
 {
 }
 
-public record GetErrorResult(string Message, ErrorCategory Code, string EntityName) : IGetRoomResult;
+public record GetErrorResult(string Message, ErrorCategory Code, string EntityName) : IGetRoomResult, IGetHomeResult;

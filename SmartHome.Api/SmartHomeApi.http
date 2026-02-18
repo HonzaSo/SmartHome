@@ -24,6 +24,17 @@ Content-Type: application/json
   "query": "query { allHome { id name street city }}"
 }
 
+### Get Home by ID
+POST {{SmartHomeApi_HostAddress}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query($id: UUID!) { homeById(id: $id) { ... on HomeTypeResponse { id name street city zipCode } ... on GetErrorResult { message code entityName } } }",
+  "variables": {
+    "id": "81cf53b2-4f40-48c3-9225-f3d435003a44"
+  }
+}
+
 ### Remove Home by Id
 POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
@@ -54,7 +65,7 @@ Content-Type: application/json
 {
   "query": "query($homeId: UUID!) { roomsByHomeId(homeId: $homeId) { id name type } }",
   "variables": {
-    "homeId": "81cf53b2-4f40-48c3-9225-f3d435003a44"
+    "homeId": "81cf53b2-4f40-48c3-9225-f3d435003a43"
   }
 }
 
