@@ -34,4 +34,10 @@ public class RoomRepository (ApplicationDbContext context) : IRoomRepository
             .Cast<Room>()
             .ToList();
     }
+
+    public async Task<Room?> GetRoomByIdAsync(Guid roomId, CancellationToken cancellationToken)
+    {
+        var room = await context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId, cancellationToken);
+        return RoomMapper.MapToDomain(room);
+    }
 }
