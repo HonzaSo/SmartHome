@@ -2,11 +2,7 @@ using Serilog;
 using SmartHome.Application;
 using SmartHome.Infrastructure;
 using SmartHomeApi;
-using SmartHomeApi.GraphQL.Dtos.Homes;
-using SmartHomeApi.GraphQL.Dtos.Rooms;
-using SmartHomeApi.GraphQL.Interfaces;
-using SmartHomeApi.GraphQL.Mutations;
-using SmartHomeApi.GraphQL.Queries;
+using SmartHomeApi.GraphQL.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,22 +15,7 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
-builder.Services
-    .AddGraphQLServer()
-    .AddQueryType(d => d.Name("Query"))
-        .AddTypeExtension<HomeQueries>()
-        .AddTypeExtension<RoomQueries>()
-    .AddMutationType(d => d.Name("Mutation"))
-        .AddTypeExtension<HomeMutations>()
-        .AddTypeExtension<RoomMutations>()
-    .AddUnionType<IGetRoomResult>(d => d
-        .Name("GetRoomResult")
-        .Type<ObjectType<RoomTypeResponse>>()
-        .Type<ObjectType<GetErrorResult>>())
-    .AddUnionType<IGetHomeResult>(d => d
-        .Name("GetHomeResult")
-        .Type<ObjectType<HomeTypeResponse>>()
-        .Type<ObjectType<GetErrorResult>>());
+builder.Services.AddGraphQlConfiguration();
 
 builder.Services.AddApplicationDi();
 builder.Services.AddInfrastructureDi(builder.Configuration);
