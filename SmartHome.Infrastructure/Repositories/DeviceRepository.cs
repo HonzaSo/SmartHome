@@ -15,8 +15,14 @@ public class DeviceRepository(ApplicationDbContext context) : IDeviceRepository
         return deviceEntity.Id;
     }
 
-    public async Task<List<Device>> GetAllByRoomIdAsync(Guid roomId, CancellationToken cancellationToken)
+    public async Task<List<Device>?> GetAllByRoomIdAsync(Guid roomId, CancellationToken cancellationToken)
     {
+        var roomEntity = await context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId, cancellationToken);
+        if (roomEntity == null)
+        {
+            return null;
+        }
+        
         var deviceEntities = await context.Devices
             .Where(d => d.RoomId == roomId)
             .ToListAsync(cancellationToken);
