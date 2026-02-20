@@ -96,3 +96,14 @@ Content-Type: application/json
     }
   }
 }
+
+### Get devices by Room Id
+POST {{SmartHomeApi_HostAddress}}/graphql/
+Content-Type: application/json
+
+{
+  "query": "query($roomId: UUID!) { devicesByRoomId(roomId: $roomId) { id name model manufacturer state } }",
+  "variables": {
+    "roomId": "00a298f8-d702-4040-b51d-10437c355f53"
+  }
+}
