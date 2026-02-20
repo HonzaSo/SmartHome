@@ -79,3 +79,20 @@ Content-Type: application/json
     "id": "00a298f8-d702-4040-b51d-10437c355f53"
   }
 }
+
+### Create a new Device
+POST {{SmartHomeApi_HostAddress}}/graphql/
+Content-Type: application/json
+
+{
+  "query": "mutation($input: CreateDeviceRequestInput!) { createDevice(request: $input) }",
+  "variables": {
+    "input": {
+      "roomId": "00a298f8-d702-4040-b51d-10437c355f52",
+      "name": "Stropní světlo",
+      "model": "SL-1000",
+      "manufacturer": "ACME Lighting",
+      "state": "Offline"
+    }
+  }
+}

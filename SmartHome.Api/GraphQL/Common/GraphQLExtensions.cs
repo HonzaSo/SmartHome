@@ -13,11 +13,12 @@ public static class GraphQlExtensions
     {
         return services.AddGraphQLServer()
             .AddQueryType(d => d.Name("Query"))
-            .AddTypeExtension<HomeQueries>()
-            .AddTypeExtension<RoomQueries>()
+                .AddTypeExtension<HomeQueries>()
+                .AddTypeExtension<RoomQueries>()
             .AddMutationType(d => d.Name("Mutation"))
-            .AddTypeExtension<HomeMutations>()
-            .AddTypeExtension<RoomMutations>()
+                .AddTypeExtension<HomeMutations>()
+                .AddTypeExtension<RoomMutations>()
+                .AddTypeExtension<DeviceMutations>()
             .AddResultUnion<IGetHomeResult, HomeTypeResponse>("GetHomeResult")
             .AddResultUnion<IGetRoomResult, RoomTypeResponse>("GetRoomResult");
     }

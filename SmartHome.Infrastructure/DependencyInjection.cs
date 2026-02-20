@@ -17,7 +17,7 @@ public static class DependencyInjection
 
         var dbSettings = databaseSection.Get<Database>(); 
 
-        services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+        services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseNpgsql(dbSettings?.ConnectionString, x => 
                 x.MigrationsAssembly("SmartHome.Infrastructure"));
@@ -25,6 +25,7 @@ public static class DependencyInjection
 
         services.AddScoped<IHomeRepository, HomeRepository>();
         services.AddScoped<IRoomRepository, RoomRepository>();
+        services.AddScoped<IDeviceRepository, DeviceRepository>();
 
         return services;
     }
