@@ -12,6 +12,7 @@ public static class DependencyInjection
         services.AddScoped<DeviceMutations>();
         services.AddScoped<HomeQueries>();
         services.AddScoped<RoomQueries>();
+        services.AddScoped<DeviceQueries>();
 
         return services;
     }

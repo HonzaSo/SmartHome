@@ -15,6 +15,7 @@ public static class GraphQlExtensions
             .AddQueryType(d => d.Name("Query"))
                 .AddTypeExtension<HomeQueries>()
                 .AddTypeExtension<RoomQueries>()
+                .AddTypeExtension<DeviceQueries>()
             .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<HomeMutations>()
                 .AddTypeExtension<RoomMutations>()
