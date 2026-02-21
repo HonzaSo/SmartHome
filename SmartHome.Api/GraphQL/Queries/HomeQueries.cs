@@ -19,7 +19,7 @@ public class HomeQueries (IMediator mediator, ILogger<HomeQueries> logger)
 
         if (home == null)
         {
-            return new GetErrorResult("Home not found.", ErrorCategory.InputNotFound, id.ToString());
+            return new GetErrorResult("Home not found.", ErrorCategory.EntityNotFound, id.ToString());
         }
         
         return HomeTypeMapper.MapFromDomain(home);
