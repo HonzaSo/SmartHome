@@ -18,7 +18,7 @@ public class DeviceQueries (IMediator mediator, ILogger<DeviceQueries> logger)
         
         if (devices == null)
         {
-            return new GetErrorResult("Room not found.", ErrorCategory.NotFound, "Room");
+            return new GetErrorResult("Room not found.", ErrorCategory.InputNotFound, "Room");
         }
         
         return new DevicesListResponse()
