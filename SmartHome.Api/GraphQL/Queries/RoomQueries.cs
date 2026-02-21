@@ -18,7 +18,7 @@ public class RoomQueries(IMediator mediator, ILogger<RoomQueries> logger)
 
         if (rooms == null)
         {
-            return new GetErrorResult("Home not found.", ErrorCategory.InputNotFound, "Home");
+            return new GetErrorResult("Home not found.", ErrorCategory.EntityNotFound, "Home");
         }
         
         return new RoomsListResponse 
@@ -35,7 +35,7 @@ public class RoomQueries(IMediator mediator, ILogger<RoomQueries> logger)
 
         if (room == null)
         {
-            return new GetErrorResult("Room not found.", ErrorCategory.InputNotFound, "Room");
+            return new GetErrorResult("Room not found.", ErrorCategory.EntityNotFound, "Room");
         }
         
         return RoomTypeMapper.MapFromDomain(room);
