@@ -1,5 +1,6 @@
 using MediatR;
 using SmartHome.Application.Queries;
+using SmartHomeApi.GraphQL.Dtos.Devices;
 using SmartHomeApi.GraphQL.Enums;
 using SmartHomeApi.GraphQL.Errors;
 using SmartHomeApi.GraphQL.Interfaces;
@@ -24,6 +25,27 @@ public class DeviceQueries (IMediator mediator, ILogger<DeviceQueries> logger)
         return new DevicesListResponse()
         {
             Devices = devices.Select(DeviceTypeMapper.MapFromDomain).ToList()
+        };
+    }
+
+    public async Task<IGetDeviceResult> GetDeviceById(Guid deviceId)
+    {
+        logger.LogInformation("Getting device for deviceId {DeviceId}", deviceId);
+
+        var device = await mediator.Send(new GetDeviceByIdQuery { Id = deviceId });
+
+        if (device == null)
+        {
+            return new GetErrorResult("Device not found.", ErrorCategory.EntityNotFound, "Device");
+        }
+
+        return new DeviceTypeResponse()
+        {
+            Id = device.Id,
+            Name = device.Name,
+            Model = device.Model,
+            Manufacturer = device.Manufacturer,
+            State = (DeviceStateEnum)device.State
         };
     }
 }

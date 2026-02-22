@@ -3,7 +3,7 @@ using SmartHomeApi.GraphQL.Interfaces;
 
 namespace SmartHomeApi.GraphQL.Errors;
 
-public record GetErrorResult : IGetHomeResult, IGetRoomResult, IGetRoomsResult, IGetDevicesResult
+public record GetErrorResult : IGetHomeResult, IGetRoomResult, IGetRoomsResult, IGetDeviceResult, IGetDevicesResult
 {
     public string Message { get; init; }
     public ErrorCategory Code { get; init; }

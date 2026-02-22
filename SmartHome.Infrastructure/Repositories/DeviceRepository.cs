@@ -35,7 +35,7 @@ public class DeviceRepository(ApplicationDbContext context) : IDeviceRepository
 
     public async Task<Device?> GetByIdAsync(Guid deviceId, CancellationToken cancellationToken)
     {
-        var entity = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId, cancellationToken);
-        return DeviceMapper.MapToDomain(entity);
+        var deviceEntity = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId, cancellationToken);
+        return DeviceMapper.MapToDomain(deviceEntity);
     }
 }
