@@ -1,4 +1,5 @@
 using HotChocolate.Execution.Configuration;
+using SmartHomeApi.GraphQL.Dtos.Devices;
 using SmartHomeApi.GraphQL.Dtos.Homes;
 using SmartHomeApi.GraphQL.Dtos.Rooms;
 using SmartHomeApi.GraphQL.Errors;
@@ -24,6 +25,7 @@ public static class GraphQlExtensions
             .AddResultUnion<IGetHomeResult, HomeTypeResponse>("GetHomeResult")
             .AddResultUnion<IGetRoomResult, RoomTypeResponse>("GetRoomResult")
             .AddResultUnion<IGetRoomsResult, RoomsListResponse>("GetRoomsResult")
+            .AddResultUnion<IGetDeviceResult, DeviceTypeResponse>("GetDeviceResult")
             .AddResultUnion<IGetDevicesResult, DevicesListResponse>("GetDevicesResult");
     }
     

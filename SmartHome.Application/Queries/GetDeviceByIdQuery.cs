@@ -1,0 +1,10 @@
+using MediatR;
+using SmartHome.Domain.Domains;
+
+namespace SmartHome.Application.Queries;
+
+public class GetDeviceByIdQuery : IRequest<Device?>
+{
+    public Guid Id { get; set; }
+    
+}
