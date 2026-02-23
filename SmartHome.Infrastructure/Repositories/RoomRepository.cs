@@ -23,7 +23,7 @@ public class RoomRepository (ApplicationDbContext context) : IRoomRepository
         return roomEntity.Id;
     }
 
-    public async Task<List<Room>> GetAllRoomsByHomeIdAsync(Guid homeId, CancellationToken cancellationToken)
+    public async Task<List<Room>?> GetAllRoomsByHomeIdAsync(Guid homeId, CancellationToken cancellationToken)
     {
         var roomEntities = await context.Rooms
             .Where(r => r.HomeId == homeId)

@@ -1,17 +1,18 @@
 using SmartHomeApi.GraphQL.Enums;
+using SmartHomeApi.GraphQL.Interfaces;
 
 namespace SmartHomeApi.GraphQL.Errors;
 
-public class GetErrorResult
+public record GetErrorResult : IGetHomeResult, IGetRoomResult, IGetRoomsResult, IGetDeviceResult, IGetDevicesResult
 {
     public string Message { get; init; }
     public ErrorCategory Code { get; init; }
     public string EntityName { get; init; }
 
-    public GetErrorResult(string entityName, ErrorCategory errorCode, string id)
+    public GetErrorResult(string message, ErrorCategory code, string entityName)
     {
+        Message = message;
+        Code = code;
         EntityName = entityName;
-        Code = errorCode;
-        Message = $"{entityName} with ID {id} was not found.";
     }
 }

@@ -3,7 +3,7 @@ using SmartHomeApi.GraphQL.Enums;
 
 namespace SmartHomeApi.GraphQL.Dtos.Devices;
 
-public class DeviceTypeResponse : IGetRoomResult
+public class DeviceTypeResponse : IGetDeviceResult
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

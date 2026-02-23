@@ -3,8 +3,8 @@ using SmartHome.Domain.Domains;
 
 namespace SmartHome.Application.Queries;
 
-public class GetDevicesByRoomIdQuery : IRequest<List<Device>?>
+public class GetDeviceByIdQuery : IRequest<Device?>
 {
     public Guid Id { get; set; }
+    
 }
-

@@ -1,5 +1,5 @@
 namespace SmartHomeApi.GraphQL.Interfaces;
 
-public interface IGetRoomResult
+public interface IGetDeviceResult
 {
 }

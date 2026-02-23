@@ -15,8 +15,14 @@ public class DeviceRepository(ApplicationDbContext context) : IDeviceRepository
         return deviceEntity.Id;
     }
 
-    public async Task<List<Device>> GetAllByRoomIdAsync(Guid roomId, CancellationToken cancellationToken)
+    public async Task<List<Device>?> GetAllByRoomIdAsync(Guid roomId, CancellationToken cancellationToken)
     {
+        var roomEntity = await context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId, cancellationToken);
+        if (roomEntity == null)
+        {
+            return null;
+        }
+        
         var deviceEntities = await context.Devices
             .Where(d => d.RoomId == roomId)
             .ToListAsync(cancellationToken);
@@ -29,7 +35,7 @@ public class DeviceRepository(ApplicationDbContext context) : IDeviceRepository
 
     public async Task<Device?> GetByIdAsync(Guid deviceId, CancellationToken cancellationToken)
     {
-        var entity = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId, cancellationToken);
-        return DeviceMapper.MapToDomain(entity);
+        var deviceEntity = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId, cancellationToken);
+        return DeviceMapper.MapToDomain(deviceEntity);
     }
 }

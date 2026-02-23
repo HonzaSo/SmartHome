@@ -63,9 +63,9 @@ POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
 
 {
-  "query": "query($homeId: UUID!) { roomsByHomeId(homeId: $homeId) { id name type } }",
+  "query": "query($homeId: UUID!) { roomsByHomeId(homeId: $homeId) {  ... on RoomsListResponse {  rooms {  id  name  type }} ... on GetErrorResult { message code } } }",
   "variables": {
-    "homeId": "81cf53b2-4f40-48c3-9225-f3d435003a43"
+    "homeId": "81cf53b2-4f40-48c3-9225-f3d435003a44"
   }
 }
 
@@ -102,8 +102,19 @@ POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
 
 {
-  "query": "query($roomId: UUID!) { devicesByRoomId(roomId: $roomId) { id name model manufacturer state } }",
+  "query": "query($roomId: UUID!) { devicesByRoomId(roomId: $roomId) { ... on DevicesListResponse { devices { id name model manufacturer state } } ... on GetErrorResult { message code } } }",
   "variables": {
     "roomId": "00a298f8-d702-4040-b51d-10437c355f53"
+  }
+}
+
+### Get Device by ID
+POST {{SmartHomeApi_HostAddress}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query($deviceId: UUID!) { deviceById(deviceId: $deviceId) { ... on DeviceTypeResponse { id name model manufacturer state } ... on GetErrorResult { message code entityName } } }",
+  "variables": {
+    "deviceId": "2cc0abe9-dab3-4774-b7a8-9b27982ff554"
   }
 }

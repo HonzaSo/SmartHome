@@ -2,6 +2,7 @@ using MediatR;
 using SmartHome.Application.Queries;
 using SmartHomeApi.GraphQL.Dtos.Homes;
 using SmartHomeApi.GraphQL.Enums;
+using SmartHomeApi.GraphQL.Errors;
 using SmartHomeApi.GraphQL.Interfaces;
 using SmartHomeApi.Mappers;
 
@@ -18,7 +19,7 @@ public class HomeQueries (IMediator mediator, ILogger<HomeQueries> logger)
 
         if (home == null)
         {
-            return new GetErrorResult(id.ToString(), ErrorCategory.NotFound, "Home not found.");
+            return new GetErrorResult("Home not found.", ErrorCategory.EntityNotFound, id.ToString());
         }
         
         return HomeTypeMapper.MapFromDomain(home);
