@@ -39,14 +39,7 @@ public class DeviceQueries (IMediator mediator, ILogger<DeviceQueries> logger)
             return new GetErrorResult("Device not found.", ErrorCategory.EntityNotFound, "Device");
         }
 
-        return new DeviceTypeResponse()
-        {
-            Id = device.Id,
-            Name = device.Name,
-            Model = device.Model,
-            Manufacturer = device.Manufacturer,
-            State = (DeviceStateEnum)device.State
-        };
+        return DeviceTypeMapper.MapFromDomain(device);
     }
 }
 
