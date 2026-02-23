@@ -8,4 +8,3 @@ public interface IDeviceRepository
     Task<List<Device>?> GetAllByRoomIdAsync(Guid roomId, CancellationToken cancellationToken);
     Task<Device?> GetByIdAsync(Guid deviceId, CancellationToken cancellationToken);
 }
-
