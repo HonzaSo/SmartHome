@@ -40,4 +40,18 @@ public class RoomRepository (ApplicationDbContext context) : IRoomRepository
         var room = await context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId, cancellationToken);
         return RoomMapper.MapToDomain(room);
     }
+
+    public async Task RemoveByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        await context.Rooms
+            .Where(r => r.Id == id)
+            .ExecuteDeleteAsync(cancellationToken);
+
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
+    public Task<bool> HasDevicesAsync(Guid roomId, CancellationToken cancellationToken)
+    {
+        return context.Devices.AnyAsync(d => d.RoomId == roomId, cancellationToken);
+    }
 }
