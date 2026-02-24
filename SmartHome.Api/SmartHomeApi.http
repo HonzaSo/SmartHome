@@ -80,6 +80,17 @@ Content-Type: application/json
   }
 }
 
+### Remove Room by ID
+POST {{SmartHomeApi_HostAddress}}/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation($roomId: UUID!) { removeRoomById(roomId: $roomId) }",
+  "variables": {
+    "roomId": "e71db8b9-4859-47b7-893d-5f62728ac1dd"
+  }
+}
+
 ### Create a new Device
 POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
