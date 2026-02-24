@@ -38,4 +38,13 @@ public class DeviceRepository(ApplicationDbContext context) : IDeviceRepository
         var deviceEntity = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId, cancellationToken);
         return DeviceMapper.MapToDomain(deviceEntity);
     }
+
+    public async Task RemoveByIdAsync(Guid deviceId, CancellationToken cancellationToken)
+    {
+        await context.Devices
+            .Where(d => d.Id == deviceId)
+            .ExecuteDeleteAsync(cancellationToken);
+        
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }

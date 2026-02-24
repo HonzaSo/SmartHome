@@ -1,7 +1,9 @@
 using MediatR;
 using SmartHome.Application.Commands;
+using SmartHome.Application.Enums;
 using SmartHome.Domain.Enums;
 using SmartHomeApi.GraphQL.Dtos.Devices;
+using SmartHomeApi.GraphQL.Enums;
 
 namespace SmartHomeApi.GraphQL.Mutations;
 
@@ -24,5 +26,24 @@ public class DeviceMutations (IMediator mediator, ILogger<DeviceMutations> logge
         };
 
         return await mediator.Send(command);
+    }
+
+    public async Task<DeviceRemovalResult> RemoveDeviceById(Guid deviceId)
+    {
+        logger.LogInformation("Removing device by id: {DeviceId}", deviceId);
+
+        var request = new RemoveDeviceCommand()
+        {
+            Id = deviceId
+        };
+
+        var result = await mediator.Send(request);
+
+        return result switch
+        {
+            DeleteResultStatus.Deleted => DeviceRemovalResult.Success,
+            DeleteResultStatus.NotFound => DeviceRemovalResult.NotFound,
+            _ => DeviceRemovalResult.Failure
+        };
     }
 }

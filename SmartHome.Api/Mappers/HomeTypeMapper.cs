@@ -14,7 +14,6 @@ public static class HomeTypeMapper
             Street = home.Address.Street,
             City = home.Address.City,
             ZipCode = home.Address.ZipCode
-            
         };
     }
 }
