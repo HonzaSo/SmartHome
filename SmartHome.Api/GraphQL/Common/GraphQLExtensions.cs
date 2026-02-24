@@ -23,8 +23,10 @@ public static class GraphQlExtensions
                 .AddTypeExtension<RoomMutations>()
                 .AddTypeExtension<DeviceMutations>()
             .AddResultUnion<IGetHomeResult, HomeTypeResponse>("GetHomeResult")
+            .AddResultUnion<ICreateRoomResult, CreateRoomSuccess>("CreateRoomResult")
             .AddResultUnion<IGetRoomResult, RoomTypeResponse>("GetRoomResult")
             .AddResultUnion<IGetRoomsResult, RoomsListResponse>("GetRoomsResult")
+            .AddResultUnion<ICreateDeviceResult, CreateDeviceSuccess>("CreateDeviceResult")
             .AddResultUnion<IGetDeviceResult, DeviceTypeResponse>("GetDeviceResult")
             .AddResultUnion<IGetDevicesResult, DevicesListResponse>("GetDevicesResult");
     }
