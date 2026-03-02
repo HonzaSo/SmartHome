@@ -35,6 +35,21 @@ Content-Type: application/json
   }
 }
 
+### Update Home by ID
+POST {{SmartHomeApi_HostAddress}}/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation($homeId: UUID!, $input: UpdateHomeRequestInput!) { updateHome(homeId: $homeId, request: $input) }",
+  "variables": {
+    "homeId": "81cf53b2-4f40-48c3-9225-f3d435003a44",
+    "input": {
+      "name": "Aktualizovaný byt",
+      "city": "Liberec"
+    }
+  }
+}
+
 ### Remove Home by Id
 POST {{SmartHomeApi_HostAddress}}/graphql/
 Content-Type: application/json
@@ -77,6 +92,21 @@ Content-Type: application/json
   "query": "query($id: UUID!) { roomById(id: $id) { ... on RoomTypeResponse { id name type } ... on GetErrorResult { message code entityName } } }",
   "variables": {
     "id": "00a298f8-d702-4040-b51d-10437c355f53"
+  }
+}
+
+### Update Room by ID
+POST {{SmartHomeApi_HostAddress}}/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation($roomId: UUID!, $input: UpdateRoomRequestInput!) { updateRoom(roomId: $roomId, request: $input) }",
+  "variables": {
+    "roomId": "00a298f8-d702-4040-b51d-10437c355f53",
+    "input": {
+      "name": "Koupelna",
+      "type": "Bathroom"
+    }
   }
 }
 
@@ -127,6 +157,21 @@ Content-Type: application/json
   "query": "query($deviceId: UUID!) { deviceById(deviceId: $deviceId) { ... on DeviceTypeResponse { id name model manufacturer state } ... on GetErrorResult { message code entityName } } }",
   "variables": {
     "deviceId": "c80c7fc8-db93-4ce9-9f37-74375e627a95"
+  }
+}
+
+### Update Device by ID
+POST {{SmartHomeApi_HostAddress}}/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation($deviceId: UUID!, $input: UpdateDeviceRequestInput!) { updateDevice(deviceId: $deviceId, request: $input) }",
+  "variables": {
+    "deviceId": "c80c7fc8-db93-4ce9-9f37-74375e627a95",
+    "input": {
+      "name": "Aktualizované světlo",
+      "state": "Online"
+    }
   }
 }
 
