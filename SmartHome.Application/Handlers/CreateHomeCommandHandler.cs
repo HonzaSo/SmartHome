@@ -9,7 +9,7 @@ public class CreateHomeCommandHandler(IHomeRepository homeRepository) : IRequest
 {
     public async Task<Guid> Handle(CreateHomeCommand request, CancellationToken cancellationToken)
     {
-        var address = new Address()
+        var address = new Address
         {
             Street = request.Street, 
             City = request.City, 

@@ -14,14 +14,14 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
         {
             Id = homeDomain.Id,
             Name = homeDomain.Name,
-            Address = new Entities.Address() 
+            Address = new Entities.Address()
             {
                 Street = homeDomain.Address.Street,
                 City = homeDomain.Address.City,
                 ZipCode = homeDomain.Address.ZipCode
             }
         };
-        
+
         context.Homes.Add(dbEntity);
         await context.SaveChangesAsync(cancellationToken);
         return dbEntity.Id;
@@ -30,11 +30,11 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
     public async Task<List<Home>> GetAllHomesAsync(CancellationToken cancellationToken)
     {
         var homes = await context.Homes.AsNoTracking().ToListAsync(cancellationToken);
-        
+
         return homes.Select(HomeMapper.MapToDomain)
-             .Where(h => h != null)
-             .Cast<Home>()
-             .ToList();
+            .Where(h => h != null)
+            .Cast<Home>()
+            .ToList();
     }
 
     public async Task<Home?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -42,7 +42,7 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
         var homeEntity = await context.Homes.FirstOrDefaultAsync(h => h.Id == id, cancellationToken);
         return HomeMapper.MapToDomain(homeEntity);
     }
-    
+
     public async Task RemoveByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         await context.Homes
@@ -54,5 +54,23 @@ public class HomeRepository(ApplicationDbContext context) : IHomeRepository
     public Task<bool> HasRoomsAsync(Guid homeId, CancellationToken cancellationToken)
     {
         return context.Rooms.AnyAsync(r => r.HomeId == homeId, cancellationToken);
+    }
+
+    public async Task UpdateAsync(Home homeDomain, CancellationToken cancellationToken)
+    {
+        var existingEntity = await context.Homes.FirstOrDefaultAsync(h => h.Id == homeDomain.Id, cancellationToken);
+
+        if (existingEntity == null)
+        {
+            return;
+        }
+
+        existingEntity.Name = homeDomain.Name;
+        existingEntity.Address.Street = homeDomain.Address.Street;
+        existingEntity.Address.City = homeDomain.Address.City;
+        existingEntity.Address.ZipCode = homeDomain.Address.ZipCode;
+
+        context.Homes.Update(existingEntity);
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

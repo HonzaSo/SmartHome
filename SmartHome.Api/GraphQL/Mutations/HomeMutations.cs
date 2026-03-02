@@ -43,4 +43,28 @@ public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
             _ => HomeRemovalResult.Failure
         };
     }
+
+    public async Task<UpdateHomeResult> UpdateHome(Guid homeId, UpdateHomeRequest request)
+    {
+        logger.LogInformation("Updating home by id: {HomeId}", homeId);
+
+        var command = new UpdateHomeCommand()
+        {
+            Id = homeId,
+            Name = request.Name,
+            Street = request.Street,
+            City = request.City,
+            ZipCode = request.ZipCode
+        };
+
+        var result = await mediator.Send(command);
+
+        return result switch
+        {
+            UpdateResult.Success => UpdateHomeResult.Success,
+            UpdateResult.NotFound => UpdateHomeResult.NotFound,
+            UpdateResult.ValidationError => UpdateHomeResult.ValidationError,
+            _ => UpdateHomeResult.Failure
+        };
+    }
 }
