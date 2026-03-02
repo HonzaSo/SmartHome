@@ -47,4 +47,22 @@ public class DeviceRepository(ApplicationDbContext context) : IDeviceRepository
         
         await context.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task UpdateAsync(Device device, CancellationToken cancellationToken)
+    {
+        var deviceEntity = await context.Devices.FirstOrDefaultAsync(d => d.Id == device.Id, cancellationToken);
+
+        if (deviceEntity == null)
+        {
+            return;
+        }
+
+        deviceEntity.Name = device.Name;
+        deviceEntity.Model = device.Model;
+        deviceEntity.Manufacturer = device.Manufacturer;
+        deviceEntity.State = device.State.ToString();
+
+        context.Devices.Update(deviceEntity);
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }

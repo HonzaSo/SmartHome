@@ -57,4 +57,34 @@ public class DeviceMutations (IMediator mediator, ILogger<DeviceMutations> logge
             _ => DeviceRemovalResult.Failure
         };
     }
+
+    public async Task<UpdateDeviceResult> UpdateDevice(Guid deviceId, UpdateDeviceRequest request)
+    {
+        logger.LogInformation("Updating device by id: {DeviceId}", deviceId);
+
+        DeviceState? deviceState = null;
+        if (request.State.HasValue)
+        {
+            deviceState = (DeviceState)request.State.Value;
+        }
+
+        var command = new UpdateDeviceCommand()
+        {
+            Id = deviceId,
+            Name = request.Name,
+            Model = request.Model,
+            Manufacturer = request.Manufacturer,
+            State = deviceState
+        };
+
+        var result = await mediator.Send(command);
+
+        return result switch
+        {
+            UpdateResult.Success => UpdateDeviceResult.Success,
+            UpdateResult.NotFound => UpdateDeviceResult.NotFound,
+            UpdateResult.ValidationError => UpdateDeviceResult.ValidationError,
+            _ => UpdateDeviceResult.Failure
+        };
+    }
 }
