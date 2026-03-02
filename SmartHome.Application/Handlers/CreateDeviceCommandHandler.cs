@@ -9,7 +9,7 @@ public class CreateDeviceCommandHandler(IDeviceRepository deviceRepository) : IR
 {
     public async Task<Guid> Handle(CreateDeviceCommand request, CancellationToken cancellationToken)
     {
-        var device = new Device()
+        var device = new Device
         {
             Id = Guid.NewGuid(),
             Name = request.Name,
