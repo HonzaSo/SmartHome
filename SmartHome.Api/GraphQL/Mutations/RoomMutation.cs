@@ -56,4 +56,32 @@ public class RoomMutations (IMediator mediator, ILogger<RoomMutations> logger)
             _ => RoomRemovalResult.Failure
         };
     }
+
+    public async Task<UpdateRoomResult> UpdateRoom(Guid roomId, UpdateRoomRequest request)
+    {
+        logger.LogInformation("Updating room by id: {RoomId}", roomId);
+
+        RoomType? roomType = null;
+        if (!string.IsNullOrWhiteSpace(request.Type) && Enum.TryParse<RoomType>(request.Type, true, out var parsedType))
+        {
+            roomType = parsedType;
+        }
+
+        var command = new UpdateRoomCommand
+        {
+            Id = roomId,
+            Name = request.Name,
+            Type = roomType
+        };
+
+        var result = await mediator.Send(command);
+
+        return result switch
+        {
+            UpdateResult.Success => UpdateRoomResult.Success,
+            UpdateResult.NotFound => UpdateRoomResult.NotFound,
+            UpdateResult.ValidationError => UpdateRoomResult.ValidationError,
+            _ => UpdateRoomResult.Failure
+        };
+    }
 }

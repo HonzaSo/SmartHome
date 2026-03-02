@@ -54,4 +54,20 @@ public class RoomRepository (ApplicationDbContext context) : IRoomRepository
     {
         return context.Devices.AnyAsync(d => d.RoomId == roomId, cancellationToken);
     }
+
+    public async Task UpdateAsync(Room room, CancellationToken cancellationToken)
+    {
+        var roomEntity = await context.Rooms.FirstOrDefaultAsync(r => r.Id == room.Id, cancellationToken);
+
+        if (roomEntity == null)
+        {
+            return;
+        }
+
+        roomEntity.Name = room.Name;
+        roomEntity.Type = room.Type.ToString();
+
+        context.Rooms.Update(roomEntity);
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }
