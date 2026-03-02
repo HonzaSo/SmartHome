@@ -9,4 +9,5 @@ public interface IRoomRepository
     Task<Room?> GetRoomByIdAsync(Guid roomId, CancellationToken cancellationToken);
     Task RemoveByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<bool> HasDevicesAsync(Guid roomId, CancellationToken cancellationToken);
+    Task UpdateAsync(Room room, CancellationToken cancellationToken);
 }
