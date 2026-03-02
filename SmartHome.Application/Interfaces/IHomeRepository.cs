@@ -9,4 +9,5 @@ public interface IHomeRepository
     Task<Home?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task RemoveByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<bool> HasRoomsAsync(Guid homeId, CancellationToken cancellationToken);
+    Task UpdateAsync(Home home, CancellationToken cancellationToken);
 }
