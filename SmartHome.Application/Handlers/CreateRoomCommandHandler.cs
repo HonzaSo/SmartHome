@@ -10,12 +10,12 @@ public class CreateRoomCommandHandler(IRoomRepository roomRepository, ILogger<Cr
 {
     public async Task<Guid> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
     {
-        var room = new Room()
+        var room = new Room
         {
             Name =  request.Name,
             Type = request.Type
         };
         
-        return await roomRepository.AddAsync(request.HomeId ,room, cancellationToken);
+        return await roomRepository.AddAsync(request.HomeId, room, cancellationToken);
     }
 }
