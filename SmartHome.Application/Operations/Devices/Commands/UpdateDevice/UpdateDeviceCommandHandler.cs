@@ -15,7 +15,7 @@ public class UpdateDeviceCommandHandler(IDeviceRepository deviceRepository, ILog
 
             if (device == null)
             {
-                logger.LogWarning("Zařízení s ID {DeviceId} nebyl nalezeno pro aktualizaci.", request.Id);
+                logger.LogWarning("Device with ID {DeviceId} was not found for update.", request.Id);
                 return UpdateResult.NotFound;
             }
 
@@ -40,13 +40,13 @@ public class UpdateDeviceCommandHandler(IDeviceRepository deviceRepository, ILog
             }
 
             await deviceRepository.UpdateAsync(device, cancellationToken);
-            logger.LogInformation("Zařízení {DeviceId} bylo úspěšně aktualizováno.", request.Id);
+            logger.LogInformation("Device with ID {DeviceId} was successfully updated.", request.Id);
             
             return UpdateResult.Success;
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Chyba při aktualizaci zařízení {DeviceId}", request.Id);
+            logger.LogError(e, "Error updating device with ID {DeviceId}", request.Id);
             return UpdateResult.Error;
         }
     }

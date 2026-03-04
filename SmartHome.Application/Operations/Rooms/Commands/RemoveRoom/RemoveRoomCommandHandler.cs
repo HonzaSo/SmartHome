@@ -26,7 +26,7 @@ public class RemoveRoomCommandHandler(IRoomRepository roomRepository, ILogger<Re
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Chyba při mazání místnosti {RoomId}",  request.Id);
+            logger.LogError(e, "Error deleting room {RoomId}",  request.Id);
             return DeleteResultStatus.Error;
         }
     }
@@ -35,7 +35,7 @@ public class RemoveRoomCommandHandler(IRoomRepository roomRepository, ILogger<Re
     {
         if (room == null)
         {
-            logger.LogWarning("Místnost s ID {RoomId} nebyla nalezena pro smazání.", id);
+            logger.LogWarning("Room with ID {RoomId} was not found for deletion.", id);
             return DeleteResultStatus.NotFound;
         }
 

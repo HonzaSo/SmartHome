@@ -15,7 +15,7 @@ public class UpdateHomeCommandHandler(IHomeRepository homeRepository, ILogger<Up
 
             if (home == null)
             {
-                logger.LogWarning("Domov s ID {HomeId} nebyl nalezen pro aktualizaci.", request.Id);
+                logger.LogWarning("Home with ID {HomeId} was not found for update.", request.Id);
                 return UpdateResult.NotFound;
             }
 
@@ -41,13 +41,13 @@ public class UpdateHomeCommandHandler(IHomeRepository homeRepository, ILogger<Up
             }
 
             await homeRepository.UpdateAsync(home, cancellationToken);
-            logger.LogInformation("Domov {HomeId} byl úspěšně aktualizován.", request.Id);
+            logger.LogInformation("Home with ID {HomeId} was successfully updated.", request.Id);
             
             return UpdateResult.Success;
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Chyba při aktualizaci domu {HomeId}", request.Id);
+            logger.LogError(e, "Error updating home with ID {HomeId}", request.Id);
             return UpdateResult.Error;
         }
     }

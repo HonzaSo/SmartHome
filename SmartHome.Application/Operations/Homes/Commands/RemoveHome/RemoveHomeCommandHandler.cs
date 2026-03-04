@@ -26,7 +26,7 @@ public class RemoveHomeCommandHandler(IHomeRepository homeRepository, ILogger<Re
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Chyba při mazání {HomeId}",  request.Id);
+            logger.LogError(e, "Error deleting home {HomeId}",  request.Id);
             return DeleteResultStatus.Error;
         }
     }
@@ -35,7 +35,7 @@ public class RemoveHomeCommandHandler(IHomeRepository homeRepository, ILogger<Re
     {
         if (home == null)
         {
-            logger.LogWarning("Domov s ID {HomeId} nebyl nalezen pro smazání.", id);
+            logger.LogWarning("Home with ID {HomeId} was not found for deletion.", id);
 
             return DeleteResultStatus.NotFound;
         }

@@ -15,7 +15,7 @@ public class UpdateRoomCommandHandler(IRoomRepository roomRepository, ILogger<Up
 
             if (room == null)
             {
-                logger.LogWarning("Místnost s ID {RoomId} nebyla nalezena pro aktualizaci.", request.Id);
+                logger.LogWarning("Room with ID {RoomId} was not found for update.", request.Id);
                 return UpdateResult.NotFound;
             }
 
@@ -30,13 +30,13 @@ public class UpdateRoomCommandHandler(IRoomRepository roomRepository, ILogger<Up
             }
 
             await roomRepository.UpdateAsync(room, cancellationToken);
-            logger.LogInformation("Místnost {RoomId} byla úspěšně aktualizována.", request.Id);
+            logger.LogInformation("Room with ID {RoomId} was successfully updated.", request.Id);
             
             return UpdateResult.Success;
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Chyba při aktualizaci místnosti {RoomId}", request.Id);
+            logger.LogError(e, "Error updating room with ID {RoomId}", request.Id);
             return UpdateResult.Error;
         }
     }

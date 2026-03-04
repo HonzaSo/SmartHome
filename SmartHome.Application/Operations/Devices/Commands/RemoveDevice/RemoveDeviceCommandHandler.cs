@@ -15,7 +15,7 @@ public class RemoveDeviceCommandHandler(IDeviceRepository deviceRepository, ILog
 
             if (device == null)
             {
-                logger.LogWarning("Zařízení s ID {DeviceId} nebyl nalezeno pro smazání.", request.Id);
+                logger.LogWarning("Device with ID {DeviceId} was not found for deletion.", request.Id);
                 return DeleteResultStatus.NotFound;
             }
 
@@ -24,7 +24,7 @@ public class RemoveDeviceCommandHandler(IDeviceRepository deviceRepository, ILog
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Chyba při mazání zařízení {DeviceId}", request.Id);
+            logger.LogError(e, "Error deleting device {DeviceId}", request.Id);
             return DeleteResultStatus.Error;
         }
     }
