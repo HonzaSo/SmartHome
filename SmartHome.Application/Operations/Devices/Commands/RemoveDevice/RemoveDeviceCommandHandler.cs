@@ -1,0 +1,32 @@
+using MediatR;
+using Microsoft.Extensions.Logging;
+using SmartHome.Application.Enums;
+using SmartHome.Application.Interfaces;
+
+namespace SmartHome.Application.Operations.Devices.Commands.RemoveDevice;
+
+public class RemoveDeviceCommandHandler(IDeviceRepository deviceRepository, ILogger<RemoveDeviceCommandHandler> logger) : IRequestHandler<RemoveDeviceCommand, DeleteResultStatus>
+{
+    public async Task<DeleteResultStatus> Handle(RemoveDeviceCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var device = await deviceRepository.GetByIdAsync(request.Id, cancellationToken);
+
+            if (device == null)
+            {
+                logger.LogWarning("Device with ID {DeviceId} was not found for deletion.", request.Id);
+                return DeleteResultStatus.NotFound;
+            }
+
+            await deviceRepository.RemoveByIdAsync(request.Id, cancellationToken);
+            return DeleteResultStatus.Deleted;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error deleting device {DeviceId}", request.Id);
+            return DeleteResultStatus.Error;
+        }
+    }
+}
+

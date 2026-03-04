@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using SmartHome.Application.Commands;
+using SmartHome.Application.Operations.Homes.Commands.CreateHome;
 
 namespace SmartHome.Application;
 
