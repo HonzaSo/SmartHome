@@ -1,7 +1,9 @@
 using MediatR;
-using SmartHome.Application.Commands;
 using SmartHome.Application.Enums;
-using SmartHome.Application.Queries;
+using SmartHome.Application.Operations.Devices.Commands.CreateDevice;
+using SmartHome.Application.Operations.Devices.Commands.RemoveDevice;
+using SmartHome.Application.Operations.Devices.Commands.UpdateDevice;
+using SmartHome.Application.Operations.Rooms.Queries.GetRoomById;
 using SmartHome.Domain.Enums;
 using SmartHomeApi.GraphQL.Dtos.Devices;
 using SmartHomeApi.GraphQL.Enums;

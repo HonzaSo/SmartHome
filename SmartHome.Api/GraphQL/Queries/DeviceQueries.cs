@@ -1,5 +1,6 @@
 using MediatR;
-using SmartHome.Application.Queries;
+using SmartHome.Application.Operations.Devices.Queries.GetDeviceById;
+using SmartHome.Application.Operations.Devices.Queries.GetDeviceByRoomId;
 using SmartHomeApi.GraphQL.Dtos.Devices;
 using SmartHomeApi.GraphQL.Enums;
 using SmartHomeApi.GraphQL.Errors;

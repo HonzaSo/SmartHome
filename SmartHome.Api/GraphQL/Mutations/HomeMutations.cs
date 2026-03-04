@@ -1,6 +1,8 @@
 using MediatR;
-using SmartHome.Application.Commands;
 using SmartHome.Application.Enums;
+using SmartHome.Application.Operations.Homes.Commands.CreateHome;
+using SmartHome.Application.Operations.Homes.Commands.RemoveHome;
+using SmartHome.Application.Operations.Homes.Commands.UpdateHome;
 using SmartHomeApi.GraphQL.Dtos.Homes;
 using SmartHomeApi.GraphQL.Enums;
 
