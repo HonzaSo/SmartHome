@@ -34,7 +34,7 @@ public class UpdateRoomCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.NotFound);
+        result.Should().Be(UpdateResultStatus.NotFound);
         await _roomRepository.DidNotReceive().UpdateAsync(Arg.Any<Room>(), Arg.Any<CancellationToken>());
     }
 
@@ -50,7 +50,7 @@ public class UpdateRoomCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         room.Name.Should().Be("New Name");
         await _roomRepository.Received(1).UpdateAsync(room, Arg.Any<CancellationToken>());
     }
@@ -67,7 +67,7 @@ public class UpdateRoomCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         room.Type.Should().Be(RoomType.Kitchen);
         await _roomRepository.Received(1).UpdateAsync(room, Arg.Any<CancellationToken>());
     }
@@ -84,7 +84,7 @@ public class UpdateRoomCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         room.Name.Should().Be("New Name");
         room.Type.Should().Be(RoomType.Bathroom);
         await _roomRepository.Received(1).UpdateAsync(room, Arg.Any<CancellationToken>());
@@ -101,7 +101,7 @@ public class UpdateRoomCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Error);
+        result.Should().Be(UpdateResultStatus.Error);
     }
 }
 
