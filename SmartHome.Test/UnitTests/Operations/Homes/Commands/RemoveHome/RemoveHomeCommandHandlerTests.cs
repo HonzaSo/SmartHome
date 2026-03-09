@@ -7,7 +7,7 @@ using SmartHome.Application.Interfaces;
 using SmartHome.Application.Operations.Homes.Commands.RemoveHome;
 using SmartHome.Domain.Domains;
 
-namespace SmartHome.Test.UnitTests.Operations.Rooms.Commands.RemoveRoom;
+namespace SmartHome.Test.UnitTests.Operations.Homes.Commands.RemoveHome;
 
 public class RemoveHomeCommandHandlerTests
 {
