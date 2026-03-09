@@ -1,6 +1,6 @@
 namespace SmartHomeApi.GraphQL.Dtos.Homes;
 
-public class HomeTypeRequest
+public class CreateHomeRequest
 {
     public required string Name { get; set; }
     public required string Street { get; set; }

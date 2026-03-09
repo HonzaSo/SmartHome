@@ -26,7 +26,7 @@ public class HomeQueries (IMediator mediator, ILogger<HomeQueries> logger)
         return HomeTypeMapper.MapFromDomain(home);
     }
     
-    public async Task<List<HomeTypeResponse>> GetAllHome()
+    public async Task<List<GetHomeResponse>> GetAllHome()
     {
         logger.LogInformation("Getting all homes");
         

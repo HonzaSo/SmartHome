@@ -5,9 +5,9 @@ using SmartHome.Application.Interfaces;
 
 namespace SmartHome.Application.Operations.Rooms.Commands.UpdateRoom;
 
-public class UpdateRoomCommandHandler(IRoomRepository roomRepository, ILogger<UpdateRoomCommandHandler> logger) : IRequestHandler<UpdateRoomCommand, UpdateResult>
+public class UpdateRoomCommandHandler(IRoomRepository roomRepository, ILogger<UpdateRoomCommandHandler> logger) : IRequestHandler<UpdateRoomCommand, UpdateResultStatus>
 {
-    public async Task<UpdateResult> Handle(UpdateRoomCommand request, CancellationToken cancellationToken)
+    public async Task<UpdateResultStatus> Handle(UpdateRoomCommand request, CancellationToken cancellationToken)
     {
         try
         {
@@ -16,7 +16,7 @@ public class UpdateRoomCommandHandler(IRoomRepository roomRepository, ILogger<Up
             if (room == null)
             {
                 logger.LogWarning("Room with ID {RoomId} was not found for update.", request.Id);
-                return UpdateResult.NotFound;
+                return UpdateResultStatus.NotFound;
             }
 
             if (!string.IsNullOrWhiteSpace(request.Name))
@@ -32,12 +32,12 @@ public class UpdateRoomCommandHandler(IRoomRepository roomRepository, ILogger<Up
             await roomRepository.UpdateAsync(room, cancellationToken);
             logger.LogInformation("Room with ID {RoomId} was successfully updated.", request.Id);
             
-            return UpdateResult.Success;
+            return UpdateResultStatus.Success;
         }
         catch (Exception e)
         {
             logger.LogError(e, "Error updating room with ID {RoomId}", request.Id);
-            return UpdateResult.Error;
+            return UpdateResultStatus.Error;
         }
     }
 }

@@ -2,7 +2,7 @@ using SmartHomeApi.GraphQL.Interfaces;
 
 namespace SmartHomeApi.GraphQL.Dtos.Homes;
 
-public class HomeTypeResponse : IGetHomeResult
+public class GetHomeResponse : IGetHomeResult
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

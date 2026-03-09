@@ -1,6 +1,6 @@
 namespace SmartHome.Application.Enums;
 
-public enum UpdateResult
+public enum UpdateResultStatus
 {
     Success,
     NotFound,

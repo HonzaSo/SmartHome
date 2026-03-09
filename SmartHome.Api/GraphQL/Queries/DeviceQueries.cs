@@ -23,7 +23,7 @@ public class DeviceQueries (IMediator mediator, ILogger<DeviceQueries> logger)
             return new GetErrorResult("Room not found.", ErrorCategory.EntityNotFound, "Room");
         }
         
-        return new DevicesListResponse()
+        return new DevicesListResponse
         {
             Devices = devices.Select(DeviceTypeMapper.MapFromDomain).ToList()
         };
