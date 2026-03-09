@@ -394,7 +394,7 @@ Příklad logu:
 [14:23:46 INF] [END] Handled CreateHomeCommand in 1250ms
 ```
 
-## Licencia
+## Licence
 
 MIT
 
