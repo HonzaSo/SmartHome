@@ -394,14 +394,6 @@ Příklad logu:
 [14:23:46 INF] [END] Handled CreateHomeCommand in 1250ms
 ```
 
-## Budoucí rozšíření
-
-- [ ] Vyhledávání zařízení v celém systému
-- [ ] Stránkování seznamů
-- [ ] Role a oprávnění uživatelů
-- [ ] Real-time notifikace přes WebSockets
-- [ ] API dokumentace (GraphQL Playground)
-
 ## Licencia
 
 MIT
