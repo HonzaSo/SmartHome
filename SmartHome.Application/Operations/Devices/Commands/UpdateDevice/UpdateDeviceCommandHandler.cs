@@ -5,9 +5,9 @@ using SmartHome.Application.Interfaces;
 
 namespace SmartHome.Application.Operations.Devices.Commands.UpdateDevice;
 
-public class UpdateDeviceCommandHandler(IDeviceRepository deviceRepository, ILogger<UpdateDeviceCommandHandler> logger) : IRequestHandler<UpdateDeviceCommand, UpdateResult>
+public class UpdateDeviceCommandHandler(IDeviceRepository deviceRepository, ILogger<UpdateDeviceCommandHandler> logger) : IRequestHandler<UpdateDeviceCommand, UpdateResultStatus>
 {
-    public async Task<UpdateResult> Handle(UpdateDeviceCommand request, CancellationToken cancellationToken)
+    public async Task<UpdateResultStatus> Handle(UpdateDeviceCommand request, CancellationToken cancellationToken)
     {
         try
         {
@@ -16,7 +16,7 @@ public class UpdateDeviceCommandHandler(IDeviceRepository deviceRepository, ILog
             if (device == null)
             {
                 logger.LogWarning("Device with ID {DeviceId} was not found for update.", request.Id);
-                return UpdateResult.NotFound;
+                return UpdateResultStatus.NotFound;
             }
 
             if (!string.IsNullOrWhiteSpace(request.Name))
@@ -42,12 +42,12 @@ public class UpdateDeviceCommandHandler(IDeviceRepository deviceRepository, ILog
             await deviceRepository.UpdateAsync(device, cancellationToken);
             logger.LogInformation("Device with ID {DeviceId} was successfully updated.", request.Id);
             
-            return UpdateResult.Success;
+            return UpdateResultStatus.Success;
         }
         catch (Exception e)
         {
             logger.LogError(e, "Error updating device with ID {DeviceId}", request.Id);
-            return UpdateResult.Error;
+            return UpdateResultStatus.Error;
         }
     }
 }

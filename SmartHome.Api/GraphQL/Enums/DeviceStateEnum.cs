@@ -5,6 +5,8 @@ public enum DeviceStateEnum
     [GraphQLName("Offline")]
     Offline,
     [GraphQLName("Online")]
-    Online
+    Online,
+    [GraphQLName("Error")]
+    Error
 }
 

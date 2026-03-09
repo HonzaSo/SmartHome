@@ -11,7 +11,7 @@ namespace SmartHomeApi.GraphQL.Mutations;
 [ExtendObjectType("Mutation")]
 public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
 {
-    public async Task<Guid> CreateHome(HomeTypeRequest request)
+    public async Task<Guid> CreateHome(CreateHomeRequest request)
     {
         logger.LogInformation("Creating home {HomeName}", request.Name);
         
@@ -63,9 +63,9 @@ public class HomeMutations (IMediator mediator, ILogger<HomeMutations> logger)
 
         return result switch
         {
-            UpdateResult.Success => UpdateHomeResult.Success,
-            UpdateResult.NotFound => UpdateHomeResult.NotFound,
-            UpdateResult.ValidationError => UpdateHomeResult.ValidationError,
+            UpdateResultStatus.Success => UpdateHomeResult.Success,
+            UpdateResultStatus.NotFound => UpdateHomeResult.NotFound,
+            UpdateResultStatus.ValidationError => UpdateHomeResult.ValidationError,
             _ => UpdateHomeResult.Failure
         };
     }

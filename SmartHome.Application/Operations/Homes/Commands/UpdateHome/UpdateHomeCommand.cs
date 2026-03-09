@@ -3,7 +3,7 @@ using SmartHome.Application.Enums;
 
 namespace SmartHome.Application.Operations.Homes.Commands.UpdateHome;
 
-public record UpdateHomeCommand : IRequest<UpdateResult>
+public record UpdateHomeCommand : IRequest<UpdateResultStatus>
 {
     public Guid Id { get; init; }
     public string? Name { get; init; }

@@ -22,12 +22,12 @@ public static class GraphQlExtensions
                 .AddTypeExtension<HomeMutations>()
                 .AddTypeExtension<RoomMutations>()
                 .AddTypeExtension<DeviceMutations>()
-            .AddResultUnion<IGetHomeResult, HomeTypeResponse>("GetHomeResult")
+            .AddResultUnion<IGetHomeResult, GetHomeResponse>("GetHomeResult")
             .AddResultUnion<ICreateRoomResult, CreateRoomSuccess>("CreateRoomResult")
-            .AddResultUnion<IGetRoomResult, RoomTypeResponse>("GetRoomResult")
+            .AddResultUnion<IGetRoomResult, GetRoomResponse>("GetRoomResult")
             .AddResultUnion<IGetRoomsResult, RoomsListResponse>("GetRoomsResult")
             .AddResultUnion<ICreateDeviceResult, CreateDeviceSuccess>("CreateDeviceResult")
-            .AddResultUnion<IGetDeviceResult, DeviceTypeResponse>("GetDeviceResult")
+            .AddResultUnion<IGetDeviceResult, GetDeviceResponse>("GetDeviceResult")
             .AddResultUnion<IGetDevicesResult, DevicesListResponse>("GetDevicesResult");
     }
     

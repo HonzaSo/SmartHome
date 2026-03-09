@@ -4,7 +4,7 @@ using SmartHome.Domain.Enums;
 
 namespace SmartHome.Application.Operations.Devices.Commands.UpdateDevice;
 
-public record UpdateDeviceCommand : IRequest<UpdateResult>
+public record UpdateDeviceCommand : IRequest<UpdateResultStatus>
 {
     public Guid Id { get; init; }
     public string? Name { get; init; }

@@ -7,9 +7,9 @@ namespace SmartHomeApi.Mappers;
 
 public static class DeviceTypeMapper
 {
-    public static DeviceTypeResponse MapFromDomain(Device device)
+    public static GetDeviceResponse MapFromDomain(Device device)
     {
-        return new DeviceTypeResponse
+        return new GetDeviceResponse
         {
             Id = device.Id,
             Name = device.Name,

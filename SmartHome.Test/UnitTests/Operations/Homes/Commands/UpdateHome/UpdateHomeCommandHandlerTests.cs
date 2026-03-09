@@ -33,7 +33,7 @@ public class UpdateHomeCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.NotFound);
+        result.Should().Be(UpdateResultStatus.NotFound);
         await _homeRepository.DidNotReceive().UpdateAsync(Arg.Any<Home>(), Arg.Any<CancellationToken>());
     }
 
@@ -54,7 +54,7 @@ public class UpdateHomeCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         home.Name.Should().Be("New Name");
         await _homeRepository.Received(1).UpdateAsync(home, Arg.Any<CancellationToken>());
     }
@@ -82,7 +82,7 @@ public class UpdateHomeCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         home.Address.Street.Should().Be("New Street");
         home.Address.City.Should().Be("New City");
         home.Address.ZipCode.Should().Be("54321");
@@ -106,7 +106,7 @@ public class UpdateHomeCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         home.Address.Street.Should().Be("New Street");
         home.Address.City.Should().Be("City");
         await _homeRepository.Received(1).UpdateAsync(home, Arg.Any<CancellationToken>());
@@ -123,7 +123,7 @@ public class UpdateHomeCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Error);
+        result.Should().Be(UpdateResultStatus.Error);
     }
 
     [Fact]
@@ -144,7 +144,7 @@ public class UpdateHomeCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         home.Name.Should().Be(originalName);
         await _homeRepository.Received(1).UpdateAsync(home, Arg.Any<CancellationToken>());
     }

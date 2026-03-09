@@ -5,9 +5,9 @@ using SmartHome.Application.Interfaces;
 
 namespace SmartHome.Application.Operations.Homes.Commands.UpdateHome;
 
-public class UpdateHomeCommandHandler(IHomeRepository homeRepository, ILogger<UpdateHomeCommandHandler> logger) : IRequestHandler<UpdateHomeCommand, UpdateResult>
+public class UpdateHomeCommandHandler(IHomeRepository homeRepository, ILogger<UpdateHomeCommandHandler> logger) : IRequestHandler<UpdateHomeCommand, UpdateResultStatus>
 {
-    public async Task<UpdateResult> Handle(UpdateHomeCommand request, CancellationToken cancellationToken)
+    public async Task<UpdateResultStatus> Handle(UpdateHomeCommand request, CancellationToken cancellationToken)
     {
         try
         {
@@ -16,7 +16,7 @@ public class UpdateHomeCommandHandler(IHomeRepository homeRepository, ILogger<Up
             if (home == null)
             {
                 logger.LogWarning("Home with ID {HomeId} was not found for update.", request.Id);
-                return UpdateResult.NotFound;
+                return UpdateResultStatus.NotFound;
             }
 
             if (!string.IsNullOrWhiteSpace(request.Name))
@@ -43,12 +43,12 @@ public class UpdateHomeCommandHandler(IHomeRepository homeRepository, ILogger<Up
             await homeRepository.UpdateAsync(home, cancellationToken);
             logger.LogInformation("Home with ID {HomeId} was successfully updated.", request.Id);
             
-            return UpdateResult.Success;
+            return UpdateResultStatus.Success;
         }
         catch (Exception e)
         {
             logger.LogError(e, "Error updating home with ID {HomeId}", request.Id);
-            return UpdateResult.Error;
+            return UpdateResultStatus.Error;
         }
     }
 }

@@ -34,7 +34,7 @@ public class UpdateDeviceCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.NotFound);
+        result.Should().Be(UpdateResultStatus.NotFound);
         await _deviceRepository.DidNotReceive().UpdateAsync(Arg.Any<Device>(), Arg.Any<CancellationToken>());
     }
 
@@ -57,7 +57,7 @@ public class UpdateDeviceCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         device.Name.Should().Be("New Name");
         await _deviceRepository.Received(1).UpdateAsync(device, Arg.Any<CancellationToken>());
     }
@@ -81,7 +81,7 @@ public class UpdateDeviceCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         device.Model.Should().Be("New Model");
         await _deviceRepository.Received(1).UpdateAsync(device, Arg.Any<CancellationToken>());
     }
@@ -105,7 +105,7 @@ public class UpdateDeviceCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         device.Manufacturer.Should().Be("New Manufacturer");
         await _deviceRepository.Received(1).UpdateAsync(device, Arg.Any<CancellationToken>());
     }
@@ -129,7 +129,7 @@ public class UpdateDeviceCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         device.State.Should().Be(DeviceState.Offline);
         await _deviceRepository.Received(1).UpdateAsync(device, Arg.Any<CancellationToken>());
     }
@@ -160,7 +160,7 @@ public class UpdateDeviceCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Success);
+        result.Should().Be(UpdateResultStatus.Success);
         device.Name.Should().Be("New Name");
         device.Model.Should().Be("New Model");
         device.Manufacturer.Should().Be("New Manufacturer");
@@ -179,7 +179,7 @@ public class UpdateDeviceCommandHandlerTests
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
-        result.Should().Be(UpdateResult.Error);
+        result.Should().Be(UpdateResultStatus.Error);
     }
 }
 

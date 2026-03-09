@@ -15,7 +15,7 @@ namespace SmartHomeApi.GraphQL.Mutations;
 [ExtendObjectType("Mutation")]
 public class RoomMutations (IMediator mediator, ILogger<RoomMutations> logger)
 {
-    public async Task<ICreateRoomResult> CreateRoom(RoomTypeRequest request)
+    public async Task<ICreateRoomResult> CreateRoom(CreateRoomRequest request)
     {
         logger.LogInformation("Creating room {RoomName}", request.Name);
         var home = await mediator.Send(new GetHomeByIdQuery { Id = request.HomeId });
@@ -63,10 +63,17 @@ public class RoomMutations (IMediator mediator, ILogger<RoomMutations> logger)
     {
         logger.LogInformation("Updating room by id: {RoomId}", roomId);
 
-        RoomType? roomType = null;
-        if (!string.IsNullOrWhiteSpace(request.Type) && Enum.TryParse<RoomType>(request.Type, true, out var parsedType))
+        var room = await mediator.Send(new SmartHome.Application.Operations.Rooms.Queries.GetRoomById.GetRoomByIdQuery { Id = roomId });
+        if (room is null)
         {
-            roomType = parsedType;
+            logger.LogWarning("Room with id {RoomId} not found. Cannot update room.", roomId);
+            return UpdateRoomResult.NotFound;
+        }
+
+        RoomType? roomType = null;
+        if (request.Type.HasValue)
+        {
+            roomType = (RoomType)request.Type.Value;
         }
 
         var command = new UpdateRoomCommand
@@ -80,9 +87,9 @@ public class RoomMutations (IMediator mediator, ILogger<RoomMutations> logger)
 
         return result switch
         {
-            UpdateResult.Success => UpdateRoomResult.Success,
-            UpdateResult.NotFound => UpdateRoomResult.NotFound,
-            UpdateResult.ValidationError => UpdateRoomResult.ValidationError,
+            UpdateResultStatus.Success => UpdateRoomResult.Success,
+            UpdateResultStatus.NotFound => UpdateRoomResult.NotFound,
+            UpdateResultStatus.ValidationError => UpdateRoomResult.ValidationError,
             _ => UpdateRoomResult.Failure
         };
     }

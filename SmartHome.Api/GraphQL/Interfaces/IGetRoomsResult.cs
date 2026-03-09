@@ -9,5 +9,5 @@ public interface IGetRoomsResult
 
 public class RoomsListResponse : IGetRoomsResult
 {
-    public List<RoomTypeResponse> Rooms { get; set; } = new();
+    public List<GetRoomResponse> Rooms { get; set; } = new();
 }

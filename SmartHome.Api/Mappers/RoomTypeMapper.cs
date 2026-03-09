@@ -7,9 +7,9 @@ namespace SmartHomeApi.Mappers;
 
 public static class RoomTypeMapper
 {
-    public static RoomTypeResponse MapFromDomain(Room room)
+    public static GetRoomResponse MapFromDomain(Room room)
     {
-        return new RoomTypeResponse
+        return new GetRoomResponse
         {
             Id = room.Id,
             Name = room.Name,

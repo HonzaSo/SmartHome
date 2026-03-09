@@ -83,9 +83,9 @@ public class DeviceMutations (IMediator mediator, ILogger<DeviceMutations> logge
 
         return result switch
         {
-            UpdateResult.Success => UpdateDeviceResult.Success,
-            UpdateResult.NotFound => UpdateDeviceResult.NotFound,
-            UpdateResult.ValidationError => UpdateDeviceResult.ValidationError,
+            UpdateResultStatus.Success => UpdateDeviceResult.Success,
+            UpdateResultStatus.NotFound => UpdateDeviceResult.NotFound,
+            UpdateResultStatus.ValidationError => UpdateDeviceResult.ValidationError,
             _ => UpdateDeviceResult.Failure
         };
     }
